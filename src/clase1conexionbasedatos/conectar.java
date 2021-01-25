@@ -5,6 +5,7 @@ import com.istloja.controlador.Personabd;
 import javax.swing.JOptionPane;
 import com.istloja.modelo.Persona;
 import com.istloja.vistas.GestionPersona;
+import com.istloja.vistas.GestionPersonaV1;
 
 public class conectar {
     public static void main (String[] args)
@@ -27,7 +28,8 @@ public class conectar {
 //        } else {
 //            System.out.println("No se pudo eliminar");
 //        }
-        GestionPersona gestionPersona = new GestionPersona();
+//        GestionPersona gestionPersona = new GestionPersona();
+        GestionPersonaV1 gestionPersonav1 = new GestionPersonaV1();
 
     }
     

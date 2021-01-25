@@ -63,7 +63,7 @@ public class GestionPersona extends JFrame {
 
         this.add(panelTitulo, BorderLayout.NORTH);
         this.add(panelCuerpo, BorderLayout.CENTER);
-        this.add(panelBotones, BorderLayout.SOUTH);
+        this.add(panelBotones,BorderLayout.SOUTH);
         //Centrar la pantalla
         this.setLocationRelativeTo(null);
         this.setSize(new Dimension(500,300));
