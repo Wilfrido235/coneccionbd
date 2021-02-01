@@ -29,7 +29,7 @@ public class conectar {
 //            System.out.println("No se pudo eliminar");
 //        }
 //        GestionPersona gestionPersona = new GestionPersona();
-        GestionPersonaV1 gestionPersonav1 = new GestionPersonaV1();
+       
 
     }
     

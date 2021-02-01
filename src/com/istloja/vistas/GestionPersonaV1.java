@@ -10,6 +10,7 @@ import com.istloja.modelo.Persona;
 import com.istloja.utilidad.Utilidades;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,8 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
 
     private Utilidades utilidades;
     private Personabd controladorPersona;
+    private Persona personaEditar;
+
     /**
      * Creates new form GestionPersonaV1
      */
@@ -28,14 +31,16 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
         utilidades = new Utilidades();
         controladorPersona = new Personabd();
     }
-     public void limpiar(){
+
+    public void limpiar() {
         txtCedula.setText(null);
         txtNombres.setText(null);
         txtApellidos.setText(null);
         txtDireccion.setText(null);
         txtCorreo.setText(null);
         txtTelefono.setText(null);
-     }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +50,8 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         txtTitulo = new javax.swing.JLabel();
         panelCuerpoRegistro = new javax.swing.JPanel();
         lblCedula = new javax.swing.JLabel();
@@ -59,10 +66,16 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
+        btnBuscarCedula = new javax.swing.JButton();
+        btnBuscarTelefono = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnTraer = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestion Personas");
@@ -102,6 +115,20 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
             }
         });
 
+        btnBuscarCedula.setText("Buscar");
+        btnBuscarCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCedulaActionPerformed(evt);
+            }
+        });
+
+        btnBuscarTelefono.setText("Buscar");
+        btnBuscarTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarTelefonoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCuerpoRegistroLayout = new javax.swing.GroupLayout(panelCuerpoRegistro);
         panelCuerpoRegistro.setLayout(panelCuerpoRegistroLayout);
         panelCuerpoRegistroLayout.setHorizontalGroup(
@@ -116,8 +143,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
                             .addComponent(lblApellido))
                         .addGap(23, 23, 23)
                         .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
-                            .addComponent(txtNombres)
+                            .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                            .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
+                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscarCedula))
                             .addComponent(txtApellidos)))
                     .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
                         .addComponent(lblDireccion)
@@ -129,8 +159,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
                             .addComponent(lblCorreo))
                         .addGap(18, 18, 18)
                         .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefono)
-                            .addComponent(txtCorreo))))
+                            .addComponent(txtCorreo)
+                            .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscarTelefono)))))
                 .addContainerGap())
         );
         panelCuerpoRegistroLayout.setVerticalGroup(
@@ -139,7 +172,8 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCedula)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCedula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
@@ -155,8 +189,9 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefono)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarTelefono))
+                .addGap(18, 18, 18)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCorreo)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,10 +206,25 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnTraer.setText("Traer");
+        btnTraer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,7 +263,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar)
                     .addComponent(btnTraer))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,43 +271,63 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        if (controladorPersona.getPersonaCedula(txtCedula.getText()) != null) {
+            JOptionPane.showMessageDialog(rootPane, "La persona con ese número de cédula ya se encuentra registrada en el sistema.");
+        if (controladorPersona.getPersonaTelelfono(txtTelefono.getText()) != null) {
+            JOptionPane.showMessageDialog(rootPane, "La persona con ese número de telefono ya se encuentra registrada en el sistema.");
+        }  
+        }else{
+            Persona personaGuardar = guardarEditar();
+            if (personaGuardar != null) {
+                if (controladorPersona.registrarPersona(personaGuardar)) {
+                    JOptionPane.showMessageDialog(rootPane, "Persona registrada en el sistema.");
+//                limpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "No se puede guardar la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+
+    public Persona guardarEditar() {
         if (txtCedula.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo cedula no tiene datos.","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "El campo cedula no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtCedula.requestFocus();// Sirve para ubicar el cursor en un campo vacio.
-            return;
+            return null;
         }
         if (!utilidades.validadorDeCedula(txtCedula.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "la cedula ingresada no es valida","ERROR",JOptionPane.ERROR_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(rootPane, "la cedula ingresada no es valida", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
         if (txtNombres.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo nombres no tiene datos.","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "El campo nombres no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtNombres.requestFocus();
-            return;
-        }if (txtApellidos.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo apellidos no tiene datos.","ERROR",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        if (txtApellidos.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "El campo apellidos no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtApellidos.requestFocus();
-            return;
+            return null;
         }
         if (txtDireccion.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo direccion no tiene datos.","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "El campo direccion no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtDireccion.requestFocus();
-            return;
+            return null;
         }
         if (txtTelefono.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo telefono no tiene datos.","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "El campo telefono no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtTelefono.requestFocus();
-            return;
+            return null;
         }
         if (!utilidades.validarNumeros(txtTelefono.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados en el telefono no son validos.","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados en el telefono no son validos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtTelefono.requestFocus();
-            return;
+            return null;
         }
         if (txtCorreo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "El campo correo no tiene datos.","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "El campo correo no tiene datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtCorreo.requestFocus();
-            return;
+            return null;
         }
         Persona persona = new Persona();
         persona.setCedula(txtCedula.getText());
@@ -268,46 +338,117 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
         persona.setTelefono(txtTelefono.getText());
         System.out.println(persona.toString());
         if (controladorPersona.registrarPersona(persona)) {
-             
-            JOptionPane.showMessageDialog(rootPane, "Persona registrada en el sistema.");
-            limpiar(); 
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "No se puede guardar la persona","ERROR",JOptionPane.ERROR_MESSAGE);
-        }
 
+            JOptionPane.showMessageDialog(rootPane, "Persona registrada en el sistema.");
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se puede guardar la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return persona;
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         // TODO add your handling code here:
-     
-        char c= evt.getKeyChar();
-        if(c<'0'|| c>'9')evt.consume();
-     
+
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
-     public boolean inEmail(String correo){
-     Pattern pat = null;
-     Matcher mat = null;
-     pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-     mat = pat.matcher(correo);
-     if(mat.find()){
-         return true;
-     }else{
-         return false;
-     }
-     }  
+    public boolean inEmail(String correo) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        mat = pat.matcher(correo);
+        if (mat.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void txtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusLost
         // TODO add your handling code here:
-        if (inEmail(txtCorreo.getText())){           
-        }else{
-            JOptionPane.showInternalMessageDialog(null,"Email incorrecto","Validar email",JOptionPane.INFORMATION_MESSAGE);
+        if (inEmail(txtCorreo.getText())) {
+        } else {
+            JOptionPane.showInternalMessageDialog(null, "Email incorrecto", "Validar email", JOptionPane.INFORMATION_MESSAGE);
             txtCorreo.requestFocus();
         }
     }//GEN-LAST:event_txtCorreoFocusLost
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        if (personaEditar == null) {
+            JOptionPane.showMessageDialog(rootPane, "No hay una persona seleccionada para editar", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Persona personaEditarLocal = guardarEditar();
+        if (personaEditarLocal != null) {
+            personaEditarLocal.setId_persona(personaEditar.getId_persona());
+            if (controladorPersona.actualizarPersona(personaEditarLocal)) {
+                JOptionPane.showMessageDialog(rootPane, "Persona editada con exito del sitema.");
+                limpiar();
+                personaEditar = null;
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No se puede editar la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnTraerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraerActionPerformed
+        // TODO add your handling code here:
+        List<Persona> obtenerPersonas = controladorPersona.obtenerPersonas();
+        personaEditar = obtenerPersonas.get(obtenerPersonas.size() - 1);
+        txtCedula.setText(personaEditar.getCedula());
+        txtNombres.setText(personaEditar.getNombre());
+        txtApellidos.setText(personaEditar.getApellido());
+        txtDireccion.setText(personaEditar.getDireccion());
+        txtCorreo.setText(personaEditar.getCorreo());
+        txtTelefono.setText(personaEditar.getTelefono());
+    }//GEN-LAST:event_btnTraerActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCedulaActionPerformed
+        // TODO add your handling code here:
+        Persona persona = controladorPersona.getPersonaCedula(txtCedula.getText());
+        if (persona != null) {
+            txtNombres.setText(persona.getNombre());
+            txtApellidos.setText(persona.getApellido());
+            txtDireccion.setText(persona.getDireccion());
+            txtCorreo.setText(persona.getCorreo());
+            txtTelefono.setText(persona.getTelefono());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se encontro la persona con ese número de cédula en la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtCedula.setText("");
+            txtCedula.requestFocus();
+        }
+    }//GEN-LAST:event_btnBuscarCedulaActionPerformed
+
+    private void btnBuscarTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTelefonoActionPerformed
+        // TODO add your handling code here:
+         Persona persona = controladorPersona.getPersonaTelelfono(txtTelefono.getText());
+        if (persona != null) {
+            txtCedula.setText(persona.getCedula());
+            txtNombres.setText(persona.getNombre());
+            txtApellidos.setText(persona.getApellido());
+            txtDireccion.setText(persona.getDireccion());
+            txtCorreo.setText(persona.getCorreo());
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se encontro la persona con ese número de telefono en la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtTelefono.setText("");
+            txtTelefono.requestFocus();
+        }
+
+    }//GEN-LAST:event_btnBuscarTelefonoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,10 +487,14 @@ public class GestionPersonaV1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarCedula;
+    private javax.swing.JButton btnBuscarTelefono;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnTraer;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblCorreo;
