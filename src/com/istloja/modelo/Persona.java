@@ -1,7 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.istloja.modelo;
 
+/**
+ *
+ * @author johnp
+ */
 public class Persona {
-
+    
     private int id_persona;
     private String cedula;
     private String nombre;
@@ -9,8 +18,7 @@ public class Persona {
     private String direccion;
     private String correo;
     private String telefono;
-    
-    
+
     public Persona(int id_persona, String cedula, String nombre, String apellido, String direccion, String correo, String telefono) {
         this.id_persona = id_persona;
         this.cedula = cedula;
@@ -20,12 +28,18 @@ public class Persona {
         this.correo = correo;
         this.telefono = telefono;
     }
-       public Persona() {
+    
+    
+
+    public Persona() {
     }
 
     public Persona(int idPersona) {
         this.id_persona = idPersona;
     }
+
+    
+    
 
     public int getId_persona() {
         return id_persona;
@@ -82,8 +96,14 @@ public class Persona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
- @Override
+
+    @Override
     public String toString() {
-        return "Persona{"+ " cedula=" + cedula + ", nombre=" + nombre + ", apellidos=" + apellido + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + '}';
+        return "Persona{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellidos=" + apellido + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + '}';
     }
+
+    
+    
+    
+    
 }

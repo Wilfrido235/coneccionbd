@@ -5,7 +5,7 @@ import com.istloja.controlador.Personabd;
 import javax.swing.JOptionPane;
 import com.istloja.modelo.Persona;
 import com.istloja.vistas.GestionPersona;
-import com.istloja.vistas.GestionPersonaV1;
+import com.istloja.vistas.GestionPersona;
 
 public class conectar {
     public static void main (String[] args)

@@ -53,8 +53,12 @@ public class Utilidades {
         }
         return cedulaCorrecta;
     }
-    
+    //Metodo sirve para validar los numeros de cedula de las personas.
     public boolean validarNumeros(String numero){
+        //Coleccion caracteres
+        if (numero.charAt(0)!='0') {
+            return false;
+        }
         if (numero.isEmpty()) {
             return false;
         }else if (numero.length()<10) {
@@ -66,6 +70,15 @@ public class Utilidades {
         } catch (Exception e) {
             return false;
         }
+    }
+    //Metodo para validar correo
+    public boolean validarCorreo(String correo){
+        for (int i = 0; i < correo.length(); i++) {
+            if (correo.charAt(i)=='@') {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
