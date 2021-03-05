@@ -37,6 +37,7 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
     private ModelTableInventario modelTableInventario;
     private Proveedoresdb controladorProveedor;
     private Inventariobd controladorInventario;
+    private Inventario inventarioSeleccionado;
 
     /**
      * Creates new form GestionPersonaV1
@@ -44,9 +45,11 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
     public GestionContable() {
         controladorPersona = new Personabd();
         controladorProveedor = new Proveedoresdb();
+        controladorInventario= new Inventariobd();
         // modelTablePersona = new ModelTablePersona(controladorPersona.obtenerPersonas(),this);
         modelTablePersonaV2 = new ModelTablePersonaV2(controladorPersona.obtenerPersonas(), this);
         modelTableProveedores = new ModelTableProveedores(controladorProveedor.obtenerProveedores(), this);
+        modelTableInventario = new ModelTableInventario(controladorInventario.obtenerInventario(),this);
         initComponents();
         utilidades = new Utilidades();
 
@@ -152,7 +155,7 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         txtPrecio_ventaInventario = new javax.swing.JTextField();
         txtCantidad_productosInventario = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboParametroBusquedaInventario = new javax.swing.JComboBox<>();
         txtParametroBusquedaInventario = new javax.swing.JTextField();
         btnBuscarInventario = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -314,6 +317,11 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         lblBuscarCliente.setText("Buscar Cliente");
 
         comboParametroBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cédula", "Nombre", "Apellido", "Telefono", "Correo" }));
+        comboParametroBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboParametroBusquedaActionPerformed(evt);
+            }
+        });
 
         txtParametroBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -654,26 +662,21 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
 
         jLabel14.setText("Buscador");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo Producto", "Descripcion" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboParametroBusquedaInventario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo Producto", "Descripcion" }));
+        comboParametroBusquedaInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboParametroBusquedaInventarioActionPerformed(evt);
             }
         });
 
         btnBuscarInventario.setText("Buscar Inventario");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        btnBuscarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarInventarioActionPerformed(evt);
             }
-        ));
+        });
+
+        jTable1.setModel(modelTableInventario);
         jScrollPane2.setViewportView(jTable1);
 
         btnGuardarInventario.setText("Guardar");
@@ -716,35 +719,36 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         panelInventarioLayout.setHorizontalGroup(
             panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventarioLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(22, 22, 22)
                 .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelInventarioLayout.createSequentialGroup()
                         .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTituloInventario)
+                            .addGroup(panelInventarioLayout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addComponent(btnGuardarInventario)
+                                .addGap(67, 67, 67)
+                                .addComponent(btnEditarInventario)
+                                .addGap(54, 54, 54)
+                                .addComponent(btnEliminarInventario)
+                                .addGap(49, 49, 49)
+                                .addComponent(btnTraerInventario)
+                                .addGap(62, 62, 62)
+                                .addComponent(btnLimpiarInventario))
+                            .addGroup(panelInventarioLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(txtTituloInventario))
                             .addGroup(panelInventarioLayout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(26, 26, 26)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboParametroBusquedaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtParametroBusquedaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarInventario)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 23, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(panelInventarioLayout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(btnGuardarInventario)
-                .addGap(67, 67, 67)
-                .addComponent(btnEditarInventario)
-                .addGap(54, 54, 54)
-                .addComponent(btnEliminarInventario)
-                .addGap(49, 49, 49)
-                .addComponent(btnTraerInventario)
-                .addGap(62, 62, 62)
-                .addComponent(btnLimpiarInventario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelInventarioLayout.setVerticalGroup(
             panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -763,12 +767,12 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
                 .addGap(14, 14, 14)
                 .addGroup(panelInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboParametroBusquedaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtParametroBusquedaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarInventario))
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("Inventario");
@@ -815,7 +819,7 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 1237, Short.MAX_VALUE))
+                .addComponent(tabGeneral))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1000,23 +1004,23 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecios_compraInventarioActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboParametroBusquedaInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboParametroBusquedaInventarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboParametroBusquedaInventarioActionPerformed
 
     private void btnGuardarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarInventarioActionPerformed
         // TODO add your handling code here:
-          Inventario inventario = new Inventario();
-        inventario.setCodigo_pro(txtCodigo_proInventario.getText());
-        inventario.setDescripcion(txtDescripcionInventario.getText());
-        inventario.setPrecios_compra(txtPrecios_compraInventario.get);
-        inventario.setPrecio_venta(txtPrecio_ventaInventario.getText());
-        inventario.setCan_productos(txtCantidad_productosInventario.getText());
-        if (controladorInventario.registrarInventario(inventario)) {
+          Inventario i = new Inventario();
+        i.setCodigo_pro(txtCodigo_proInventario.getText());
+        i.setDescripcion(txtDescripcionInventario.getText());
+        i.setPrecios_compra(txtPrecios_compraInventario.getText());
+        i.setPrecio_venta(txtPrecio_ventaInventario.getText());
+        i.setCan_productos(txtCantidad_productosInventario.getText());
+        if (controladorInventario.registrarInventario(i)) {
             JOptionPane.showMessageDialog(rootPane, "Inventario guardado con éxito del sitema.");
             limpiarCamposInventario();
-            modelTableProveedores.setProveedores(controladorProveedor.obtenerProveedores());
-            modelTableProveedores.fireTableDataChanged();
+            modelTableInventario.setInventarios(controladorInventario.obtenerInventario());
+            modelTableInventario.fireTableDataChanged();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se puede guardar el proveedor.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -1024,10 +1028,40 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
 
     private void btnEditarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarInventarioActionPerformed
         // TODO add your handling code here:
+        if (inventarioSeleccionado == null) {
+            JOptionPane.showMessageDialog(rootPane, "No hay una propducto seleccionado para editar", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (inventarioSeleccionado != null) {
+            
+            inventarioSeleccionado = valoresActualizarInventario(inventarioSeleccionado);
+            if (controladorInventario.actualizarInventario(inventarioSeleccionado)) {
+                JOptionPane.showMessageDialog(rootPane, "Producto editado con exito del sitema.");
+                limpiarCamposInventario();
+                inventarioSeleccionado = null;
+                modelTableInventario.setInventarios(controladorInventario.obtenerInventario());
+                modelTableInventario.fireTableDataChanged();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No se puede editar la Producto", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_btnEditarInventarioActionPerformed
-
+    }
+    
     private void btnEliminarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarInventarioActionPerformed
         // TODO add your handling code here:
+       if (inventarioSeleccionado != null) {
+            if (controladorInventario.eliminarInventario(inventarioSeleccionado)) {
+                JOptionPane.showMessageDialog(rootPane, "Producto eliminado con éxito del sitema.");
+                limpiarCamposInventario();
+                inventarioSeleccionado = null;
+                modelTableInventario.setInventarios(controladorInventario.obtenerInventario());
+                modelTableInventario.fireTableDataChanged();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No se puede eliminar el producto seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No hay producto seleccionada para eliminar.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarInventarioActionPerformed
 
     private void btnTraerInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraerInventarioActionPerformed
@@ -1036,8 +1070,54 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
 
     private void btnLimpiarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarInventarioActionPerformed
         // TODO add your handling code here:
+        limpiarCamposInventario();
     }//GEN-LAST:event_btnLimpiarInventarioActionPerformed
+
+    private void btnBuscarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInventarioActionPerformed
+        // TODO add your handling code here:
+//         if (comboParametroBusquedaInventario.getSelectedItem().equals("Codigo Producto")) {
+//            List<Inventario> inventario = new ArrayList<>();
+//            inventario.add((Inventario) controladorInventario.getPersonaCodigo_pro(txtParametroBusquedaInventario.getText()));
+//            modelTableInventario.setInventarios(inventario);
+//            modelTableInventario.fireTableDataChanged();
+//            
+//        }else{
+//         //JOptionPane.showMessageDialog(null,"no se encontro");
+//        }
+//        if (comboParametroBusquedaInventario.getSelectedItem().equals("Descripcion")) {
+//            List<Inventario> Descripcion = controladorInventario.getPersonaDescripcion(txtParametroBusquedaInventario.getText());
+//            modelTableInventario.setInventarios(Descripcion);
+//            modelTableInventario.fireTableDataChanged();
+//            txtParametroBusquedaInventario.setText(null);
+//        }else{
+//         //JOptionPane.showMessageDialog(null,"no se encontro");
+//        }
+      System.out.println("Combo" + comboParametroBusquedaInventario.getSelectedIndex());
+        switch (comboParametroBusquedaInventario.getSelectedIndex()) {
+            case 0://Codigo
+                modelTableInventario.setInventarios(controladorInventario.ObtenerCodigo_pro(txtParametroBusquedaInventario.getText()));
+                modelTableInventario.fireTableDataChanged();
+                break;
+            case 1://7Descripcion
+                modelTableInventario.setInventarios(controladorInventario.ObtenerDescripcion(txtParametroBusquedaInventario.getText()));
+                modelTableInventario.fireTableDataChanged();
+                break;
+        }
+
+    }//GEN-LAST:event_btnBuscarInventarioActionPerformed
+
+    private void comboParametroBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboParametroBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboParametroBusquedaActionPerformed
     //Metodo para limpiar campos
+     private Inventario valoresActualizarInventario(Inventario i) {
+        i.setCodigo_pro(txtCodigo_proInventario.getText());
+        i.setDescripcion(txtDescripcionInventario.getText());
+        i.setPrecios_compra(txtPrecios_compraInventario.getText());
+        i.setPrecio_venta(txtPrecio_ventaInventario.getText());
+        i.setCan_productos(txtCantidad_productosInventario.getText());
+        return i;
+    }
     void limpiarCamposProveedor() {
         txtRucProveedores.setText("");
         txtRazonSocialProveedores.setText("");
@@ -1109,9 +1189,9 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
     private javax.swing.JButton btnTraer;
     private javax.swing.JButton btnTraerInventario;
     private javax.swing.JComboBox<String> comboParametroBusqueda;
+    private javax.swing.JComboBox<String> comboParametroBusquedaInventario;
     private javax.swing.JComboBox<String> comboParamtroBusquedaProveedor;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1217,13 +1297,13 @@ public class GestionContable extends javax.swing.JFrame implements ComunicacionV
         txtCorrreoProveedores.setText(p.getCorreo());
         
     }
-     @Override
-    public void clickInventario(Inventario p) {
-        txtCodigo_proInventario.setText(p.getCodigo_pro());
-        txtDescripcionInventario.setText(p.getDescripcion());
-        txtPrecios_compraInventario.setText(p.getPrecios_compra());
-        txtPrecio_ventaInventario.setText(p.getPrecio_venta());
-        txtCantidad_productosInventario.setText(p.getCan_productos());
+    public void clickInventario(Inventario i) {
+        inventarioSeleccionado = i;
+        txtCodigo_proInventario.setText(i.getCodigo_pro());
+        txtDescripcionInventario.setText(i.getDescripcion());
+        txtPrecios_compraInventario.setText(i.getPrecios_compra());
+        txtPrecio_ventaInventario.setText(i.getPrecio_venta());
+        txtCantidad_productosInventario.setText(i.getCan_productos());
 
     }
 }

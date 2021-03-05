@@ -42,6 +42,7 @@ public class Inventariobd {
         return registrar;
     } 
      public boolean actualizarInventario(Inventario inventario) {
+         System.out.println("Actualizar:"+ inventario);
         // ConexionBaseDatos con la base de datos.
         Connection connect = null;
         //Interfaz de acceso a la base de datos.
@@ -93,9 +94,9 @@ public class Inventariobd {
                 c.setId_inventario(rs.getInt(1));
                 c.setCodigo_pro(rs.getString(2));
                 c.setDescripcion(rs.getString(3));
-                c.setPrecios_compra(rs.getInt(4));
-                c.setPrecio_venta(rs.getInt(5));
-                c.setCan_productos(rs.getInt(6));
+                c.setPrecios_compra(rs.getString(4));
+                c.setPrecio_venta(rs.getString(5));
+                c.setCan_productos(rs.getString(6));
                 listaInventario.add(c);
             }
             stm.close();
@@ -107,5 +108,62 @@ public class Inventariobd {
 
         return listaInventario;
     }
-    
+     public List<Inventario> ObtenerCodigo_pro(String codigo_pro) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        List<Inventario> inventarioEncontradas = new ArrayList<>();
+        String sql = "SELECT * FROM bdejercicio1.inventario where codigo_pro like \"%"+codigo_pro+"%\"";
+        try {
+            co = new ConexionBaseDatos().conexionbd();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Inventario c = new Inventario();
+                c.setId_inventario(rs.getInt(1));
+                c.setCodigo_pro(rs.getString(2));
+                c.setDescripcion(rs.getString(3));
+                c.setPrecios_compra(rs.getString(4));
+                c.setPrecio_venta(rs.getString(5));
+                c.setCan_productos(rs.getString(6));
+                inventarioEncontradas.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return inventarioEncontradas;
+    }
+     public List<Inventario> ObtenerDescripcion(String descripcion) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        List<Inventario> inventarioEncontradas = new ArrayList<>();
+        String sql = "SELECT * FROM bdejercicio1.inventario where descripcion like \"%"+descripcion+"%\"";
+        try {
+            co = new ConexionBaseDatos().conexionbd();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Inventario c = new Inventario();
+                c.setId_inventario(rs.getInt(1));
+                c.setCodigo_pro(rs.getString(2));
+                c.setDescripcion(rs.getString(3));
+                c.setPrecios_compra(rs.getString(4));
+                c.setPrecio_venta(rs.getString(5));
+                c.setCan_productos(rs.getString(6));
+                inventarioEncontradas.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return inventarioEncontradas;
+    }
 }

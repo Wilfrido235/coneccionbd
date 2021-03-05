@@ -80,5 +80,12 @@ public class Utilidades {
         }
         return false;
     }
-
+public boolean validarNumerosInventario(String numero){
+        try {
+            int validarNumero=Integer.parseInt(numero);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

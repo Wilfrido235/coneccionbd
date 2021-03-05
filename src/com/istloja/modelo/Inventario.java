@@ -13,14 +13,14 @@ public class Inventario {
     private int id_inventario;
     private String codigo_pro;
     private String descripcion;
-    private int precios_compra;
-    private int precio_venta;
-    private int can_productos;
+    private String precios_compra;
+    private String precio_venta;
+    private String can_productos;
     
      public Inventario() {
     }
 
-    public Inventario(int id_inventario, String codigo_pro, String descripcion, int precios_compra, int precio_venta, int can_productos) {
+    public Inventario(int id_inventario, String codigo_pro, String descripcion, String precios_compra, String precio_venta, String can_productos) {
         this.id_inventario = id_inventario;
         this.codigo_pro = codigo_pro;
         this.descripcion = descripcion;
@@ -53,27 +53,27 @@ public class Inventario {
         this.descripcion = descripcion;
     }
 
-    public int getPrecios_compra() {
+    public String getPrecios_compra() {
         return precios_compra;
     }
 
-    public void setPrecios_compra(int precios_compra) {
+    public void setPrecios_compra(String precios_compra) {
         this.precios_compra = precios_compra;
     }
 
-    public int getPrecio_venta() {
+    public String getPrecio_venta() {
         return precio_venta;
     }
 
-    public void setPrecio_venta(int precio_venta) {
+    public void setPrecio_venta(String precio_venta) {
         this.precio_venta = precio_venta;
     }
 
-    public int getCan_productos() {
+    public String getCan_productos() {
         return can_productos;
     }
 
-    public void setCan_productos(int can_productos) {
+    public void setCan_productos(String can_productos) {
         this.can_productos = can_productos;
     }
 

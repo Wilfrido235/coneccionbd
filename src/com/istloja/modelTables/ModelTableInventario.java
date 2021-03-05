@@ -24,23 +24,20 @@ public class ModelTableInventario extends AbstractTableModel {
         this.inventario= inventario;
         this.gContable = gContable;
     }
-
     @Override
     public int getRowCount() {
         return inventario.size();
     }
-
     @Override
     public int getColumnCount() {
         return m_colNames.length;
     }
-
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
          Inventario inventarios = inventario.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return inventarios.getCan_productos();
+                return inventarios.getCodigo_pro();
             case 1:
                 return inventarios.getDescripcion();
             case 2:
@@ -52,22 +49,20 @@ public class ModelTableInventario extends AbstractTableModel {
         }
         return new String();
     }
-@Override
+    @Override
     public String getColumnName(int column) {
         return m_colNames[column]; //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         gContable.clickInventario(inventario.get(rowIndex));
         return super.isCellEditable(rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public List<Persona> getPersonas() {
-        return personas;
+    public List<Inventario> getInventarios() {
+        return inventario;
     }
-
-    public void setPersonas(List<Persona> personas) {
-        this.personas = personas;
+    public void setInventarios(List<Inventario> inventarios) {
+        this.inventario = inventarios;
     }
+    
 }
