@@ -28,7 +28,7 @@ public class Personabd {
         //Conexion con la base de datos.
         Connection con = null;
         //INSERT INTO `ejercicio`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) VALUES ('1', '1104268899', 'John', 'Solano', 'Loja', 'jpsolanoc@gmail.com', '072587392');
-        String sql = "INSERT INTO bdejercicio1`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) VALUES('" + String.valueOf(persona.getId_persona()) + "', '" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "');";
+        String sql = "INSERT INTO `bdejercicio1`.`persona` (`id_persona`, `cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`) VALUES('" + String.valueOf(persona.getId_persona()) + "', '" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+persona.getFecha_registro()+"','"+String.valueOf(persona.getGenero())+"');";
         try {
             //Es una instancia de la conexion previamente creada.
             ConexionBaseDatos conexion = new ConexionBaseDatos();
@@ -52,7 +52,7 @@ public class Personabd {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombre() + "', `apellidos` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "' WHERE (`idpersona` = '" + persona.getId_persona() + "');";
+        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombre() + "', `apellidos` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '"+ persona.getFecha_registro()+"',`genero` = '"+persona.getGenero()+"' WHERE (`idpersona` = '" + persona.getId_persona() + "');";
         try {
             ConexionBaseDatos con = new ConexionBaseDatos();
             connect = con.conexionbd();
@@ -102,6 +102,8 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -135,6 +137,8 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
             }
             stm.close();
             rs.close();
@@ -166,6 +170,8 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
                 personasEncontradas.add(c);
             }
             stm.close();
@@ -196,6 +202,8 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
                 personasEncontradas.add(c);
             }
             stm.close();
@@ -226,6 +234,8 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
                 personasEncontradas.add(c);
             }
             stm.close();

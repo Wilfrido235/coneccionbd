@@ -26,7 +26,7 @@ public class Inventariobd {
         //Conexion con la base de datos.
         Connection con = null;
         //INSERT INTO `ejercicio`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) VALUES ('1', '1104268899', 'John', 'Solano', 'Loja', 'jpsolanoc@gmail.com', '072587392');
-        String sql = "INSERT INTO `bdejercicio1`.`inventario` (`codigo_pro`, `descripcion`, `precios_compra`, `precio_venta`, `can_productos`) VALUES ('"+inventario.getCodigo_pro()+"', '"+inventario.getDescripcion()+"', '"+inventario.getPrecios_compra()+"', '"+inventario.getPrecio_venta()+"', '"+inventario.getCan_productos()+"');";
+        String sql = "INSERT INTO `bdejercicio1`.`inventario` (`id_inventario`, `codigo_pro`, `can_productos`, `descripcion`, `precio_compra_sin_iva`, `precio_compra_con_iva`, `precio_mayorista`, `precio_cliente_fijo`, `precio_cliente_normal`, `fecha_caducidad`, `fecha_registro`, `fecha_actualizacion`) VALUES ('"+inventario.getCodigo_pro()+"', '"+inventario.getCan_productos()+"','"+inventario.getDescripcion()+"','"+inventario.getPrecio_compra_sin_iva()+"','"+inventario.getPrecio_compra_con_iva()+"','"+inventario.getPrecio_mayorista()+"','"+inventario.getPrecio_cliente_fijo()+"','"+inventario.getPrecio_cliente_normal()+"','"+inventario.getFecha_caducidad()+"','"+inventario.getFecha_registro()+"','"+inventario.getFecha_actualizacion()+"');";
         try {
             //Es una instancia de la conexion previamente creada.
             ConexionBaseDatos conexion = new ConexionBaseDatos();
@@ -50,7 +50,7 @@ public class Inventariobd {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`inventario` SET `codigo_pro` = '"+inventario.getCodigo_pro()+"', `descripcion` = '"+inventario.getDescripcion()+"', `precios_compra` = '"+inventario.getPrecios_compra()+"', `precio_venta` = '"+inventario.getPrecio_venta()+"', `can_productos` = '"+inventario.getCan_productos()+"' WHERE (`id_inventario` = '"+inventario.getId_inventario()+"');";
+        String sql = "UPDATE `bdejercicio1`.`inventario` SET `codigo_pro` = '"+inventario.getCodigo_pro()+"',`can_productos` = '"+inventario.getCan_productos()+"',`descripcion` = '"+inventario.getDescripcion()+"', `precio_compra_sin_iva ` = '"+inventario.getPrecio_compra_sin_iva()+"', `precio_compra_sin_iva `= '"+inventario.getPrecio_compra_con_iva()+"', `precio_mayorista `= '"+inventario.getPrecio_mayorista()+"', `precio_cliente_fijo `= '"+inventario.getPrecio_cliente_fijo()+"', `precio_cliente_normal `= '"+inventario.getPrecio_cliente_normal()+"', `fecha_caducidad `= '"+inventario.getFecha_caducidad()+"', `fecha_registro `= '"+inventario.getFecha_registro()+"', `fecha_actualizacion `= '"+inventario.getFecha_actualizacion()+"' WHERE (`id_inventario` = '"+inventario.getId_inventario()+"');";
         try {
             ConexionBaseDatos con = new ConexionBaseDatos();
             connect = con.conexionbd();
@@ -93,10 +93,16 @@ public class Inventariobd {
                 Inventario c = new Inventario();
                 c.setId_inventario(rs.getInt(1));
                 c.setCodigo_pro(rs.getString(2));
-                c.setDescripcion(rs.getString(3));
-                c.setPrecios_compra(rs.getString(4));
-                c.setPrecio_venta(rs.getString(5));
-                c.setCan_productos(rs.getString(6));
+                c.setCan_productos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPrecio_compra_sin_iva(rs.getDouble(5));
+                c.setPrecio_compra_con_iva(rs.getDouble(6));
+                c.setPrecio_mayorista(rs.getDouble(7));
+                c.setPrecio_cliente_fijo(rs.getDouble(8));
+                c.setPrecio_cliente_normal(rs.getDouble(9));
+                c.setFecha_caducidad(rs.getDate(10));
+                c.setFecha_registro(rs.getDate(11));
+                c.setFecha_actualizacion(rs.getDate(12));
                 listaInventario.add(c);
             }
             stm.close();
@@ -123,10 +129,16 @@ public class Inventariobd {
                 Inventario c = new Inventario();
                 c.setId_inventario(rs.getInt(1));
                 c.setCodigo_pro(rs.getString(2));
-                c.setDescripcion(rs.getString(3));
-                c.setPrecios_compra(rs.getString(4));
-                c.setPrecio_venta(rs.getString(5));
-                c.setCan_productos(rs.getString(6));
+                c.setCan_productos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPrecio_compra_sin_iva(rs.getDouble(5));
+                c.setPrecio_compra_con_iva(rs.getDouble(6));
+                c.setPrecio_mayorista(rs.getDouble(7));
+                c.setPrecio_cliente_fijo(rs.getDouble(8));
+                c.setPrecio_cliente_normal(rs.getDouble(9));
+                c.setFecha_caducidad(rs.getDate(10));
+                c.setFecha_registro(rs.getDate(11));
+                c.setFecha_actualizacion(rs.getDate(12));
                 inventarioEncontradas.add(c);
             }
             stm.close();
@@ -152,10 +164,16 @@ public class Inventariobd {
                 Inventario c = new Inventario();
                 c.setId_inventario(rs.getInt(1));
                 c.setCodigo_pro(rs.getString(2));
-                c.setDescripcion(rs.getString(3));
-                c.setPrecios_compra(rs.getString(4));
-                c.setPrecio_venta(rs.getString(5));
-                c.setCan_productos(rs.getString(6));
+                c.setCan_productos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPrecio_compra_sin_iva(rs.getDouble(5));
+                c.setPrecio_compra_con_iva(rs.getDouble(6));
+                c.setPrecio_mayorista(rs.getDouble(7));
+                c.setPrecio_cliente_fijo(rs.getDouble(8));
+                c.setPrecio_cliente_normal(rs.getDouble(9));
+                c.setFecha_caducidad(rs.getDate(10));
+                c.setFecha_registro(rs.getDate(11));
+                c.setFecha_actualizacion(rs.getDate(12));
                 inventarioEncontradas.add(c);
             }
             stm.close();

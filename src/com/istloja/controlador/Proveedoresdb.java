@@ -26,7 +26,7 @@ public class Proveedoresdb {
         //Conexion con la base de datos.
         Connection con = null;
         //INSERT INTO `ejercicio`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) VALUES ('1', '1104268899', 'John', 'Solano', 'Loja', 'jpsolanoc@gmail.com', '072587392');
-        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`) VALUES ('"+proveedor.getRuc()+"', '"+proveedor.getRazonSocial()+"', '"+proveedor.getTipoActividad()+"', '"+proveedor.getNombreRepresentanteLegal()+"', '"+proveedor.getApellidosRepresentanteLegal()+"', '"+proveedor.getTelefono()+"', '"+proveedor.getCorreo()+"');";
+        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`id_proveedores`, `ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`, `direccion`, `fecha_registro`)  VALUES ('"+proveedor.getRuc()+"', '"+proveedor.getRazonSocial()+"', '"+proveedor.getTipoActividad()+"', '"+proveedor.getNombre_representante_legal()+"', , '"+proveedor.getApellidos_representante_legal()+"', '"+proveedor.getTelefono()+"', '"+proveedor.getCorreo()+"', '"+proveedor.getDireccion()+"',, '"+String.valueOf(proveedor.getFecha_registro())+"');";
         try {
             //Es una instancia de la conexion previamente creada.
             ConexionBaseDatos conexion = new ConexionBaseDatos();
@@ -50,7 +50,7 @@ public class Proveedoresdb {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`proveedores` SET `ruc` = '"+proveedor.getRuc()+"', `razon_social` = '"+proveedor.getRazonSocial()+"', `tipo_actividad` = '"+proveedor.getTipoActividad()+"', `nombre_representante_legal` = '"+proveedor.getNombreRepresentanteLegal()+"', `apellido_representante_legal` = '"+proveedor.getApellidosRepresentanteLegal()+"', `telefono` = '"+proveedor.getTelefono()+"', `correo` = '"+proveedor.getCorreo()+"' WHERE (`id_proveedores` = '"+proveedor.getIdProveedores()+"');";
+        String sql = "UPDATE `bdejercicio1`.`proveedores` SET `ruc` = '"+proveedor.getRuc()+"', `razon_social` = '"+proveedor.getRazonSocial()+"', `tipo_actividad` = '"+proveedor.getTipoActividad()+"', `nombre_representante_legal` = '"+proveedor.getNombre_representante_legal()+"', `apellido_representante_legal` = '"+proveedor.getApellidos_representante_legal()+"', `telefono` = '"+proveedor.getTelefono()+"', `correo` = '"+proveedor.getCorreo()+"',`direccion` = '"+proveedor.getDireccion()+"',`fecha_registro` ='"+proveedor.getFecha_registro()+"' WHERE (`id_proveedores` = '"+proveedor.getIdProveedores()+"');";
         try {
             ConexionBaseDatos con = new ConexionBaseDatos();
             connect = con.conexionbd();
@@ -98,10 +98,12 @@ public class Proveedoresdb {
                 c.setRuc(rs.getString(2));
                 c.setRazonSocial(rs.getString(3));
                 c.setTipoActividad(rs.getString(4));
-                c.setNombreRepresentanteLegal(rs.getString(5));
-                c.setApellidosRepresentanteLegal(rs.getString(6));
+                c.setNombre_representante_legal(rs.getString(5));
+                c.setApellidos_representante_legal(rs.getString(6));
                 c.setTelefono(rs.getString(7));
                 c.setCorreo(rs.getString(8));
+                c.setDireccion(rs.getString(9));
+                c.setFecha_registro(rs.getDate(10));
                 listaProveedores.add(c);
             }
             stm.close();

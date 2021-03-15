@@ -5,36 +5,40 @@
  */
 package com.istloja.modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author johnp
  */
 public class Proveedores {
+
     private int idProveedores;
     private String ruc;
     private String razonSocial;
     private String tipoActividad;
-    private String nombreRepresentanteLegal;
-    private String ApellidosRepresentanteLegal;
+    private String nombre_representante_legal;
+    private String apellidos_representante_legal;
     private String telefono;
     private String correo;
+    private String direccion;
+    private Date fecha_registro;
 
     public Proveedores() {
     }
 
-    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String ApellidosRepresentanteLegal, String telefono, String correo) {
+    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombre_representante_legal, String apellidos_representante_legal, String telefono, String correo, String direccion, Date fecha_registro) {
         this.idProveedores = idProveedores;
         this.ruc = ruc;
         this.razonSocial = razonSocial;
         this.tipoActividad = tipoActividad;
-        this.nombreRepresentanteLegal = nombreRepresentanteLegal;
-        this.ApellidosRepresentanteLegal = ApellidosRepresentanteLegal;
+        this.nombre_representante_legal = nombre_representante_legal;
+        this.apellidos_representante_legal = apellidos_representante_legal;
         this.telefono = telefono;
         this.correo = correo;
+        this.direccion = direccion;
+        this.fecha_registro = fecha_registro;
     }
-    
-    
-    
 
     public int getIdProveedores() {
         return idProveedores;
@@ -68,20 +72,20 @@ public class Proveedores {
         this.tipoActividad = tipoActividad;
     }
 
-    public String getNombreRepresentanteLegal() {
-        return nombreRepresentanteLegal;
+    public String getNombre_representante_legal() {
+        return nombre_representante_legal;
     }
 
-    public void setNombreRepresentanteLegal(String nombreRepresentanteLegal) {
-        this.nombreRepresentanteLegal = nombreRepresentanteLegal;
+    public void setNombre_representante_legal(String nombre_representante_legal) {
+        this.nombre_representante_legal = nombre_representante_legal;
     }
 
-    public String getApellidosRepresentanteLegal() {
-        return ApellidosRepresentanteLegal;
+    public String getApellidos_representante_legal() {
+        return apellidos_representante_legal;
     }
 
-    public void setApellidosRepresentanteLegal(String ApellidosRepresentanteLegal) {
-        this.ApellidosRepresentanteLegal = ApellidosRepresentanteLegal;
+    public void setApellidos_representante_legal(String apellidos_representante_legal) {
+        this.apellidos_representante_legal = apellidos_representante_legal;
     }
 
     public String getTelefono() {
@@ -100,13 +104,25 @@ public class Proveedores {
         this.correo = correo;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Date getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
+
     @Override
     public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", ApellidosRepresentanteLegal=" + ApellidosRepresentanteLegal + ", telefono=" + telefono + ", correo=" + correo + '}';
+        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombre_representante_legal=" + nombre_representante_legal + ", apellidos_representante_legal=" + apellidos_representante_legal + ", telefono=" + telefono + ", correo=" + correo + ", direccion=" + direccion + ", fecha_registro=" + fecha_registro + '}';
     }
-    
-    
 
-    
-    
 }
