@@ -5,6 +5,9 @@
  */
 package com.istloja.utilidad;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author johnp
@@ -88,4 +91,10 @@ public boolean validarNumerosInventario(String numero){
             return false;
         }
     }
+
+    public String devolverFecha(Date fecha) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        return f.format(fecha);
+    }
+
 }

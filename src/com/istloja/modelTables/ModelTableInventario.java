@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTableInventario extends AbstractTableModel {
     
-    private String[] m_colNames = {"codigo_pro","can_productos","descripcion", "precio_compra_sin_iva", "precio_compra_con_iva","precio_mayorista","precio_cliente_fijo","precio_cliente_normal","fecha_caducidad","fecha_registro","fecha_actualizacion"};
+    private String[] m_colNames = {"COD PRODUCTO", "DESCRIPCIÓN", "PRECIO COMPRA", "PRECIO VENTA", "CAN PRODUCTOS"};
     private List<Inventario> inventario;
     private GestionContable gContable;
     
@@ -41,23 +41,23 @@ public class ModelTableInventario extends AbstractTableModel {
             case 1:
                 return inventarios.getDescripcion();
             case 2:
-                return inventarios.getCan_productos();
-            case 3:
-                return inventarios.getPrecio_compra_sin_iva();
-            case 4:
-                return inventarios.getPrecio_compra_con_iva();
-            case 5:
-                return inventarios.getPrecio_mayorista();
-            case 6:
-                return inventarios.getPrecio_cliente_fijo();
-            case 7:
-                return inventarios.getPrecio_cliente_normal();
+//                return inventarios.getCan_productos();
+//            case 3:
+//                return inventarios.getPrecio_compra_sin_iva();
+//            case 4:
+//                return inventarios.getPrecio_compra_con_iva();
+//            case 5:
+//                return inventarios.getPrecio_mayorista();
+//            case 6:
+//                return inventarios.getPrecio_cliente_fijo();
+//            case 7:
+//                return inventarios.getPrecio_cliente_normal();
             case 8:
                 return inventarios.getFecha_caducidad();
-            case 9:
-                return inventarios.getFecha_registro();
-            case 10:
-                return inventarios.getFecha_actualizacion();
+//            case 9:
+//                return inventarios.getFecha_registro();
+//            case 10:
+//                return inventarios.getFecha_actualizacion();
         }
         return new String();
     }

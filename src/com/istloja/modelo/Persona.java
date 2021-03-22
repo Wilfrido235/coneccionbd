@@ -22,8 +22,10 @@ public class Persona {
     private String telefono;
     private Date fecha_registro;
     private int genero;
+    private Date fechaActualizacion;
+    private Date fachaNacimiento;
 
-    public Persona(int id_persona, String cedula, String nombre, String apellido, String direccion, String correo, String telefono, Date fecha_registro, int genero) {
+    public Persona(int id_persona, String cedula, String nombre, String apellido, String direccion, String correo, String telefono, Date fecha_registro, int genero, Date fechaActualizacion, Date fachaNacimiento) {
         this.id_persona = id_persona;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -33,7 +35,21 @@ public class Persona {
         this.telefono = telefono;
         this.fecha_registro = fecha_registro;
         this.genero = genero;
+        this.fechaActualizacion = fechaActualizacion;
+        this.fachaNacimiento = fachaNacimiento;
     }
+
+    
+
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    
 
     public Persona() {
     }
@@ -114,9 +130,18 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" + "id_persona=" + id_persona + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + ", fecha_registro=" + fecha_registro + ", genero=" + genero + '}';
+    public Date getFachaNacimiento() {
+        return fachaNacimiento;
     }
 
+    public void setFachaNacimiento(Date fachaNacimiento) {
+        this.fachaNacimiento = fachaNacimiento;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "id_persona=" + id_persona + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + ", fecha_registro=" + fecha_registro + ", genero=" + genero + ", fechaActualizacion=" + fechaActualizacion + ", fachaNacimiento=" + fachaNacimiento + '}';
+    }
+
+    
 }

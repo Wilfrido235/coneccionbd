@@ -9,6 +9,7 @@ import com.istloja.modelo.Persona;
 import java.sql.Connection;
 import java.sql.Statement;
 import com.istloja.conexionbd.ConexionBaseDatos;
+import com.istloja.utilidad.Utilidades;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,6 +21,13 @@ import java.util.List;
  */
 // Gestión entre la base de datos y el modelo que se tiene implementado en java.
 public class Personabd {
+    
+    public Utilidades utilidades;
+
+    public Personabd() {
+        utilidades = new Utilidades();
+    }
+    
     // Registrar persona en la base de datos.
     public boolean registrarPersona(Persona persona) {
         boolean registrar = false;
@@ -27,8 +35,12 @@ public class Personabd {
         Statement stm = null;
         //Conexion con la base de datos.
         Connection con = null;
-        //INSERT INTO `ejercicio`.`persona` (`idpersona`, `cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) VALUES ('1', '1104268899', 'John', 'Solano', 'Loja', 'jpsolanoc@gmail.com', '072587392');
-        String sql = "INSERT INTO `bdejercicio1`.`persona` (`id_persona`, `cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`) VALUES('" + String.valueOf(persona.getId_persona()) + "', '" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+persona.getFecha_registro()+"','"+String.valueOf(persona.getGenero())+"');";
+        String sql;
+        if(persona.getFachaNacimiento()== null){
+             sql = "INSERT INTO `bdejercicio1`.`persona` (`cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`) VALUES('" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+ utilidades.devolverFecha(persona.getFecha_registro())+"','"+persona.getGenero()+"');";
+        }else{
+             sql = "INSERT INTO `bdejercicio1`.`persona` (`cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`,`fecha_nacimineto`) VALUES('" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+ utilidades.devolverFecha(persona.getFecha_registro())+"','"+persona.getGenero()+"','"+ utilidades.devolverFecha(persona.getFachaNacimiento())+"');";
+        }  
         try {
             //Es una instancia de la conexion previamente creada.
             ConexionBaseDatos conexion = new ConexionBaseDatos();
@@ -52,7 +64,7 @@ public class Personabd {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombre() + "', `apellidos` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '"+ persona.getFecha_registro()+"',`genero` = '"+persona.getGenero()+"' WHERE (`idpersona` = '" + persona.getId_persona() + "');";
+        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombre() + "', `apellidos` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '"+ persona.getFecha_registro()+"',`genero` = '"+persona.getGenero()+"', `fecha_actualizacion` = '" + utilidades.devolverFecha(persona.getFechaActualizacion()) +"' WHERE (`idpersona` = '" + persona.getId_persona() + "');";
         try {
             ConexionBaseDatos con = new ConexionBaseDatos();
             connect = con.conexionbd();
@@ -104,6 +116,8 @@ public class Personabd {
                 c.setTelefono(rs.getString(7));
                 c.setFecha_registro(rs.getDate(8));
                 c.setGenero(rs.getInt(9));
+                c.setFechaActualizacion(rs.getDate(10));
+                c.setFachaNacimiento(rs.getDate(11));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -139,6 +153,8 @@ public class Personabd {
                 c.setTelefono(rs.getString(7));
                 c.setFecha_registro(rs.getDate(8));
                 c.setGenero(rs.getInt(9));
+                c.setFechaActualizacion(rs.getDate(10));
+                c.setFachaNacimiento(rs.getDate(11));
             }
             stm.close();
             rs.close();
@@ -147,6 +163,40 @@ public class Personabd {
             System.out.println("Error:"+ e.getMessage());
         }
         return c;
+    }
+     public List<Persona> getPersonaCedulaLista(String cedula) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        List<Persona> personasEncontradas = new ArrayList<>();
+        String sql = "SELECT * FROM ejercicio.persona where cedula like '%" + cedula + "%';";
+        try {
+            co = new  ConexionBaseDatos().conexionbd();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Persona c = new Persona();
+                c.setId_persona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombre(rs.getString(3));
+                c.setApellido(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
+                c.setFechaActualizacion(rs.getDate(10));
+                c.setFachaNacimiento(rs.getDate(11));
+                personasEncontradas.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return personasEncontradas;
     }
     
     //Metodo para buscar una persona por cedula
@@ -172,6 +222,8 @@ public class Personabd {
                 c.setTelefono(rs.getString(7));
                 c.setFecha_registro(rs.getDate(8));
                 c.setGenero(rs.getInt(9));
+                c.setFechaActualizacion(rs.getDate(10));
+                c.setFachaNacimiento(rs.getDate(11));
                 personasEncontradas.add(c);
             }
             stm.close();
@@ -204,6 +256,8 @@ public class Personabd {
                 c.setTelefono(rs.getString(7));
                 c.setFecha_registro(rs.getDate(8));
                 c.setGenero(rs.getInt(9));
+                c.setFechaActualizacion(rs.getDate(10));
+                c.setFachaNacimiento(rs.getDate(11));
                 personasEncontradas.add(c);
             }
             stm.close();
@@ -236,6 +290,8 @@ public class Personabd {
                 c.setTelefono(rs.getString(7));
                 c.setFecha_registro(rs.getDate(8));
                 c.setGenero(rs.getInt(9));
+                c.setFechaActualizacion(rs.getDate(10));
+                c.setFachaNacimiento(rs.getDate(11));
                 personasEncontradas.add(c);
             }
             stm.close();
