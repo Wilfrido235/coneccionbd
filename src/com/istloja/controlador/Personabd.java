@@ -198,9 +198,41 @@ public class Personabd {
         }
         return personasEncontradas;
     }
-    
+       public Persona getPersonaNombre(String nombre) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Persona c = null;
+        String sql = "SELECT * FROM bdejercicio1.persona where nombre like "+nombre+";";
+        try {
+            co = new ConexionBaseDatos().conexionbd();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Persona();
+                c.setId_persona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombre(rs.getString(3));
+                c.setApellido(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setFecha_registro(rs.getDate(8));
+                c.setGenero(rs.getInt(9));
+                c.setFechaActualizacion(rs.getDate(10));
+                c.setFachaNacimiento(rs.getDate(11));
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return c;
+       }
     //Metodo para buscar una persona por cedula
-    public List<Persona> getPersonaNombre(String nombre) {
+    public List<Persona> getPersonaNombreListo(String nombre) {
         Connection co = null;
         Statement stm = null;
         //Sentencia de JDBC para obtener valores de la base de datos.

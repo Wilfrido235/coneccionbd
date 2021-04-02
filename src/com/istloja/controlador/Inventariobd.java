@@ -205,5 +205,38 @@ public class Inventariobd {
         }
         return inventarioEncontradas;
     }
-
+ public Inventario ObtenerInventarioconId(int codigo) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Inventario c = null;
+        String sql = "SELECT * FROM bdejercicio1.inventario where codigo_prod like '%" + codigo + "%';";
+        try {
+            co = new ConexionBaseDatos().conexionbd();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Inventario();
+                c.setId_inventario(rs.getInt(1));
+                c.setCodigo_pro(rs.getString(2));
+                c.setDescripcion(rs.getString(3));
+                c.setPrecio_compra_sin_iva(rs.getDouble(4));
+                c.setPrecio_compra_con_iva(rs.getDouble(5));
+                c.setPrecio_mayorista(rs.getDouble(6));
+                c.setPrecio_cliente_fijo(rs.getDouble(7));
+                c.setPrecio_cliente_normal(rs.getDouble(8));
+                c.setFecha_caducidad(rs.getDate(9));
+                c.setFecha_registro(rs.getDate(10));
+                c.setFecha_actualizacion(rs.getDate(11));
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+        return c;
+    }
+    
 }

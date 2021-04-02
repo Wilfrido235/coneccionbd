@@ -122,6 +122,7 @@ public class GestionPersona {
         txtTelefono.setText("");
         txtCedula.requestFocus();
         jcbGenero.setSelectedIndex(0);
+        
     }
 
     public Persona guardarEditar(boolean isEditar) {
@@ -178,7 +179,7 @@ public class GestionPersona {
         persona.setTelefono(txtTelefono.getText());
         persona.setGenero(jcbGenero.getSelectedIndex());
         if (isEditar) {
-            persona.setFechaActualizacion(new Date());       
+            persona.setFechaActualizacion(new Date());
         }else{
             persona.setFecha_registro(new Date());
         }

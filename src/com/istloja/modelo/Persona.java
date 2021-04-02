@@ -39,8 +39,6 @@ public class Persona {
         this.fachaNacimiento = fachaNacimiento;
     }
 
-    
-
     public Date getFechaActualizacion() {
         return fechaActualizacion;
     }
@@ -48,8 +46,6 @@ public class Persona {
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
     }
-
-    
 
     public Persona() {
     }
@@ -143,5 +139,4 @@ public class Persona {
         return "Persona{" + "id_persona=" + id_persona + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + ", fecha_registro=" + fecha_registro + ", genero=" + genero + ", fechaActualizacion=" + fechaActualizacion + ", fachaNacimiento=" + fachaNacimiento + '}';
     }
 
-    
 }
