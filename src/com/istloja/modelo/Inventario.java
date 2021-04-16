@@ -25,6 +25,9 @@ public class Inventario {
     private Date fecha_caducidad;
     private Date fecha_registro;
     private Date fecha_actualizacion;
+    
+    private int cantidadProductosVender;
+
 
     public Inventario() {
     }
@@ -42,6 +45,11 @@ public class Inventario {
         this.fecha_caducidad = fecha_caducidad;
         this.fecha_registro = fecha_registro;
         this.fecha_actualizacion = fecha_actualizacion;
+        
+    }
+
+    public Inventario(int cantidadProductosVender) {
+        this.cantidadProductosVender = cantidadProductosVender;
     }
 
     public int getId_inventario() {
@@ -140,9 +148,18 @@ public class Inventario {
         this.can_productos = can_productos;
     }
 
-    @Override
-    public String toString() {
-        return "Inventario{" + "id_inventario=" + id_inventario + ", codigo_pro=" + codigo_pro + ", can_productos=" + can_productos + ", descripcion=" + descripcion + ", precio_compra_sin_iva=" + precio_compra_sin_iva + ", precio_compra_con_iva=" + precio_compra_con_iva + ", precio_mayorista=" + precio_mayorista + ", precio_cliente_fijo=" + precio_cliente_fijo + ", precio_cliente_normal=" + precio_cliente_normal + ", fecha_caducidad=" + fecha_caducidad + ", fecha_registro=" + fecha_registro + ", fecha_actualizacion=" + fecha_actualizacion + '}';
+    public int getCantidadProductosVender() {
+        return cantidadProductosVender;
     }
 
+    public void setCantidadProductosVender(int cantidadProductosVender) {
+        this.cantidadProductosVender = cantidadProductosVender;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventario{" + "id_inventario=" + id_inventario + ", codigo_pro=" + codigo_pro + ", can_productos=" + can_productos + ", descripcion=" + descripcion + ", precio_compra_sin_iva=" + precio_compra_sin_iva + ", precio_compra_con_iva=" + precio_compra_con_iva + ", precio_mayorista=" + precio_mayorista + ", precio_cliente_fijo=" + precio_cliente_fijo + ", precio_cliente_normal=" + precio_cliente_normal + ", fecha_caducidad=" + fecha_caducidad + ", fecha_registro=" + fecha_registro + ", fecha_actualizacion=" + fecha_actualizacion + ", cantidadProductosVender=" + cantidadProductosVender + '}';
+    }
+
+    
 }

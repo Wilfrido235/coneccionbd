@@ -24,6 +24,7 @@ public class Proveedores {
     private String direccion;
     private Date fechaVencimientoDeuda;
     private Date fecha_registro;
+    private Date fechaActualizacion;
 
     public Proveedores() {
     }
@@ -42,6 +43,7 @@ public class Proveedores {
         this.fecha_registro = fecha_registro;
     }
 
+    
     public Date getFechaVencimientoDeuda() {
         return fechaVencimientoDeuda;
     }
@@ -131,9 +133,16 @@ public class Proveedores {
         this.fecha_registro = fecha_registro;
     }
 
-    @Override
-    public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombre_representante_legal=" + nombre_representante_legal + ", apellidos_representante_legal=" + apellidos_representante_legal + ", telefono=" + telefono + ", correo=" + correo + ", direccion=" + direccion + ", fechaVencimientoDeuda=" + fechaVencimientoDeuda + ", fecha_registro=" + fecha_registro + '}';
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
     }
 
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    @Override
+    public String toString() {
+        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombre_representante_legal=" + nombre_representante_legal + ", apellidos_representante_legal=" + apellidos_representante_legal + ", telefono=" + telefono + ", correo=" + correo + ", direccion=" + direccion + ", fechaVencimientoDeuda=" + fechaVencimientoDeuda + ", fecha_registro=" + fecha_registro + ", fechaActualizacion=" + fechaActualizacion + '}';
+    }
 }

@@ -64,7 +64,7 @@ public class Personabd {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombres` = '" + persona.getNombre() + "', `apellidos` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '"+ persona.getFecha_registro()+"',`genero` = '"+persona.getGenero()+"', `fecha_actualizacion` = '" + utilidades.devolverFecha(persona.getFechaActualizacion()) +"' WHERE (`idpersona` = '" + persona.getId_persona() + "');";
+        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombre` = '" + persona.getNombre() + "', `apellido` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '"+ persona.getFecha_registro()+"',`genero` = '"+persona.getGenero()+"', `fecha_actualizacion` = '" + utilidades.devolverFecha(persona.getFechaActualizacion()) +"' WHERE `id_persona` = '" + persona.getId_persona() + "';";
         try {
             ConexionBaseDatos con = new ConexionBaseDatos();
             connect = con.conexionbd();
@@ -82,7 +82,7 @@ public class Personabd {
         Connection connect = null;
         Statement stm = null;
         boolean eliminar = false;
-        String sql = "DELETE FROM `bdejercicio1`.`persona` WHERE (`idpersona` = '" + String.valueOf(persona.getId_persona()) + "');";
+        String sql = "DELETE FROM `bdejercicio1`.`persona` WHERE (`id_persona` = '" + String.valueOf(persona.getId_persona()) + "');";
         try {
             connect = new ConexionBaseDatos().conexionbd();
             stm = connect.createStatement();

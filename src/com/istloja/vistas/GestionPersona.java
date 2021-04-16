@@ -122,6 +122,7 @@ public class GestionPersona {
         txtTelefono.setText("");
         txtCedula.requestFocus();
         jcbGenero.setSelectedIndex(0);
+      
         
     }
 
