@@ -51,7 +51,7 @@ public class Inventariobd {
                 +inventario.getPrecio_mayorista()+"','"
                 +inventario.getPrecio_cliente_fijo()+"','"
                 +inventario.getPrecio_cliente_normal()+"','"
-                + utilidades.devolverFecha(inventario.getFecha_registro()) + "',"
+                + utilidades.devolverFecha(inventario.getFecha_registro()) + "','"
                 + utilidades.devolverFecha(inventario.getFecha_caducidad()) + "');";
         }
         try {
@@ -86,7 +86,6 @@ public class Inventariobd {
                 + "precio_mayorista `= '"+inventario.getPrecio_mayorista()+"', `"
                 + "precio_cliente_fijo `= '"+inventario.getPrecio_cliente_fijo()+"', `"
                 + "precio_cliente_normal `= '"+inventario.getPrecio_cliente_normal()+"', `"
-                + "fecha_caducidad `= '"+utilidades.devolverFecha(inventario.getFecha_caducidad())+"', `"
                 + "fecha_registro `= '"+inventario.getFecha_registro()+"', `"
                 + "fecha_actualizacion `= '"+utilidades.devolverFecha(inventario.getFecha_actualizacion())+"',`"
                 + "`fecha_caducidad`='"+utilidades.devolverFecha(inventario.getFecha_caducidad())+"',`"+"'WHERE (`id_inventario` = '"+inventario.getId_inventario()+"');";

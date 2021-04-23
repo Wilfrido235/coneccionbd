@@ -7,6 +7,7 @@ package com.istloja.vistas;
 
 import com.istloja.modelo.Persona;
 import com.istloja.utilidad.Utilidades;
+import com.toedter.calendar.JDateChooser;
 import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -28,8 +29,9 @@ public class GestionPersona {
     private Utilidades utilidades;
     private JFrame frameGestionContable;
     private JComboBox jcbGenero;
+    private JDateChooser jDateFechaNacimiento;
 
-    public GestionPersona(JTextField txtCedula, JTextField txtNombres, JTextField txtApellidos, JTextField txtDireccion, JTextField txtCorreo, JTextField txtTelefono, Utilidades utilidades, JFrame frameGestionContable, JComboBox jcbGenero) {
+    public GestionPersona(JTextField txtCedula, JTextField txtNombres, JTextField txtApellidos, JTextField txtDireccion, JTextField txtCorreo, JTextField txtTelefono, Utilidades utilidades, JFrame frameGestionContable, JComboBox jcbGenero, JDateChooser jDateFechaNacimiento) {
         this.txtCedula = txtCedula;
         this.txtNombres = txtNombres;
         this.txtApellidos = txtApellidos;
@@ -39,6 +41,8 @@ public class GestionPersona {
         this.utilidades = utilidades;
         this.frameGestionContable = frameGestionContable;
         this.jcbGenero = jcbGenero;
+        this.jDateFechaNacimiento = jDateFechaNacimiento;
+    
     }
 
     public Utilidades getUtilidades() {
@@ -113,6 +117,14 @@ public class GestionPersona {
         this.txtTelefono = txtTelefono;
     }
 
+    public JDateChooser getjDateFechaNacimiento() {
+        return jDateFechaNacimiento;
+    }
+
+    public void setjDateFechaNacimiento(JDateChooser jDateFechaNacimiento) {
+        this.jDateFechaNacimiento = jDateFechaNacimiento;
+    }
+
     public void limpiarCamposPersona() {
         txtCedula.setText("");
         txtNombres.setText("");
@@ -122,6 +134,7 @@ public class GestionPersona {
         txtTelefono.setText("");
         txtCedula.requestFocus();
         jcbGenero.setSelectedIndex(0);
+        jDateFechaNacimiento.setCalendar(null);
       
         
     }

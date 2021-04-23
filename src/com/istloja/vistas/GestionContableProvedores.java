@@ -26,19 +26,20 @@ public class GestionContableProvedores {
     private Utilidades utilidades;
     private JFrame frameGestionContable;
 
-    public GestionContableProvedores(JTextField txtxRuc, JTextField txtxRazonSiocial, JTextField txtTipo_actividad, JTextField txtNombre_Representante_Legal, JTextField txtApellido_Representante_legal, JTextField txtTelefono_Provedores, JTextField txtCorreo_provedores, JTextField txtDireccionProvedores, JDateChooser jDateFechaVencimientoDeuda, Utilidades utilidades, JFrame frameGestionContable) {
+    public GestionContableProvedores(JTextField txtRucProveedores, JTextField txtRazonSocialProveedores, JTextField txtTipoActividadProveedores, JTextField txtNombreRepresentateLegalProveedores, JTextField txtApellidosRepresentateLegalProveedores, JTextField txtTelefonoProveedores, JTextField txtCorrreoProveedores, JTextField txtDireccionProveedores, JDateChooser jDateFechaVencimientoDeuda, Utilidades utilidades, JFrame frameGestionContable) {
         this.txtRucProveedores = txtRucProveedores;
         this.txtRazonSocialProveedores = txtRazonSocialProveedores;
         this.txtTipoActividadProveedores = txtTipoActividadProveedores;
-        this.txtNombreRepresentateLegalProveedores= txtNombreRepresentateLegalProveedores;
+        this.txtNombreRepresentateLegalProveedores = txtNombreRepresentateLegalProveedores;
         this.txtApellidosRepresentateLegalProveedores = txtApellidosRepresentateLegalProveedores;
         this.txtTelefonoProveedores = txtTelefonoProveedores;
         this.txtCorrreoProveedores = txtCorrreoProveedores;
-        this. txtDireccionProveedores=  txtDireccionProveedores;
+        this.txtDireccionProveedores = txtDireccionProveedores;
         this.jDateFechaVencimientoDeuda = jDateFechaVencimientoDeuda;
         this.utilidades = utilidades;
         this.frameGestionContable = frameGestionContable;
     }
+
 
     public JTextField getTxtRucProveedores() {
         return txtRucProveedores;

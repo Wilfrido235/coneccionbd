@@ -37,9 +37,9 @@ public class Personabd {
         Connection con = null;
         String sql;
         if(persona.getFachaNacimiento()== null){
-             sql = "INSERT INTO `bdejercicio1`.`persona` (`cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`) VALUES('" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+ utilidades.devolverFecha(persona.getFecha_registro())+"','"+persona.getGenero()+"');";
+             sql = "INSERT INTO `bdejercicio1`.`persona` (`id_persona`,`cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`) VALUES('" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+ utilidades.devolverFecha(persona.getFecha_registro())+"','"+persona.getGenero()+"');";
         }else{
-             sql = "INSERT INTO `bdejercicio1`.`persona` (`cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`,`fecha_nacimineto`) VALUES('" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+ utilidades.devolverFecha(persona.getFecha_registro())+"','"+persona.getGenero()+"','"+ utilidades.devolverFecha(persona.getFachaNacimiento())+"');";
+             sql = "INSERT INTO `bdejercicio1`.`persona` (`id_persona`,`cedula`, `nombre`, `apellido`, `direccion`, `correo`, `telefono`, `fecha_registro`,`genero`,`fecha_nacimineto`) VALUES('" + persona.getCedula() + "', '" + persona.getNombre() + "', '" + persona.getApellido() + "', '" + persona.getDireccion() + "', '" + persona.getCorreo() + "', '" + persona.getTelefono() + "','"+ utilidades.devolverFecha(persona.getFecha_registro())+"','"+persona.getGenero()+"','"+ utilidades.devolverFecha(persona.getFachaNacimiento())+"');";
         }  
         try {
             //Es una instancia de la conexion previamente creada.
@@ -64,7 +64,7 @@ public class Personabd {
         // retorno del metodo cuando se realice la actualizacion
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
-        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombre` = '" + persona.getNombre() + "', `apellido` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '"+ persona.getFecha_registro()+"',`genero` = '"+persona.getGenero()+"', `fecha_actualizacion` = '" + utilidades.devolverFecha(persona.getFechaActualizacion()) +"' WHERE `id_persona` = '" + persona.getId_persona() + "';";
+        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + "', `nombre` = '" + persona.getNombre() + "', `apellido` = '" + persona.getApellido() + "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" +persona.getCorreo() + "', `telefono` = '" + persona.getTelefono() + "',`fecha_registro` = '"+ persona.getFecha_registro()+"',`genero` = '"+persona.getGenero()+"', `fecha_actualizacion` = '" + utilidades.devolverFecha(persona.getFechaActualizacion()) +"' WHERE (`id_persona` = '" + persona.getId_persona() + "');";
         try {
             ConexionBaseDatos con = new ConexionBaseDatos();
             connect = con.conexionbd();
@@ -137,7 +137,7 @@ public class Personabd {
         //Sentencia de JDBC para obtener valores de la base de datos.
         ResultSet rs = null;
         Persona c = null;
-        String sql = "SELECT * FROM bdejercicio1.persona where cedula like "+cedula+";";
+        String sql = "SELECT * FROM bdejercicio1.persona where cedula like "+cedula+"";
         try {
             co = new ConexionBaseDatos().conexionbd();
             stm = co.createStatement();
