@@ -78,17 +78,17 @@ public class Inventariobd {
         boolean actualizar = false;
         //Contatenando la opcion de actualizacion
         String sql = "UPDATE `bdejercicio1`.`inventario` SET "
-                +"`codigo_pro` = '"+inventario.getCodigo_pro()+"',`"
-                + "can_productos` = '"+inventario.getCan_productos()+"',`"
-                + "descripcion` = '"+inventario.getDescripcion()+"', `"
+                +"`codigo_pro` = '"            +inventario.getCodigo_pro()+"',`"
+                + "can_productos` = '"         +inventario.getCan_productos()+"',`"
+                + "descripcion` = '"           +inventario.getDescripcion()+"', `"
                 + "precio_compra_sin_iva ` = '"+inventario.getPrecio_compra_sin_iva()+"', `"
-                + "precio_compra_sin_iva `= '"+inventario.getPrecio_compra_con_iva()+"', `"
-                + "precio_mayorista `= '"+inventario.getPrecio_mayorista()+"', `"
-                + "precio_cliente_fijo `= '"+inventario.getPrecio_cliente_fijo()+"', `"
-                + "precio_cliente_normal `= '"+inventario.getPrecio_cliente_normal()+"', `"
-                + "fecha_registro `= '"+inventario.getFecha_registro()+"', `"
-                + "fecha_actualizacion `= '"+utilidades.devolverFecha(inventario.getFecha_actualizacion())+"',`"
-                + "`fecha_caducidad`='"+utilidades.devolverFecha(inventario.getFecha_caducidad())+"',`"+"'WHERE (`id_inventario` = '"+inventario.getId_inventario()+"');";
+                + "precio_compra_sin_iva `= '" +inventario.getPrecio_compra_con_iva()+"', `"
+                + "precio_mayorista `= '"      +inventario.getPrecio_mayorista()+"', `"
+                + "precio_cliente_fijo `= '"   +inventario.getPrecio_cliente_fijo()+"', `"
+                + "precio_cliente_normal `= '" +inventario.getPrecio_cliente_normal()+"', `"
+                + "fecha_registro `= '"        +inventario.getFecha_registro()+"', `"
+                + "fecha_actualizacion `= '"   +utilidades.devolverFecha(inventario.getFecha_actualizacion())+"',`"
+                + "`fecha_caducidad`='"        +utilidades.devolverFecha(inventario.getFecha_caducidad())+"',`"+"'WHERE (`id_inventario` = '"+inventario.getId_inventario()+"');";
         try {
             ConexionBaseDatos con = new ConexionBaseDatos();
             connect = con.conexionbd();
